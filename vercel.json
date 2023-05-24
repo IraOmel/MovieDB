@@ -1,13 +1,19 @@
 {
-    "builds": [{
-        "src": "movie_database/wsgi.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9.16 " }
-    }],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "movie_database/wsgi.py"
-        }
-    ]
+  "builds": [
+    {
+      "src": "movie_database/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9.16",
+        "buildCommand": "pip install --upgrade sqlite3 --global-option=build_ext --global-option='-I/usr/include/sqlite3' --global-option='-L/usr/lib/'"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "movie_database/wsgi.py"
+    }
+  ]
 }
